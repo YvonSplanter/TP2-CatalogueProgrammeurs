@@ -46,9 +46,10 @@ public class Programmeur implements Comparable<Programmeur> {
     }
     
     public void setLangages(String s){
-        String[] lgs = s.split("[,]");
+        String[] lgs = s.split(",");
         for (String l : lgs) {
             this.ajouterLangage(l);
+            System.out.println(l);
         }
     }
     

@@ -23,8 +23,7 @@ public class ProgrammeurController {
     @RequestMapping("/")
     public String welcome(ModelMap model) {
         List<Programmeur> liste = this.programmeurService.getProgrammeurs();
-        model.addAttribute("bienvenue", "Bienvenue au service de conversion de monnaies");
-        model.addAttribute("monnaies", liste);
+        model.addAttribute("programmeur", liste);
         return "index";
     }
 }

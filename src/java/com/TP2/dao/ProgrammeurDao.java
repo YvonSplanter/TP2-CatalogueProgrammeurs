@@ -36,9 +36,10 @@ public class ProgrammeurDao {
             PreparedStatement stm = connexion.getInstance().prepareStatement("SELECT * FROM programmeur");
             ResultSet res = stm.executeQuery();
             while (res.next()){
-                p = new Programmeur(res.getString("langages"));
+                p = new Programmeur();
                 p.setNom(res.getString("NOM"));
-                p.setCourriel(res.getString("VALEUR"));
+                p.setCourriel(res.getString("COURRIEL"));
+                p.setLangages(res.getString("LANGAGES"));
                 liste.add(p);
             }
         } catch (SQLException ex) {
