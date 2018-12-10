@@ -84,6 +84,6 @@ public class Programmeur implements Comparable<Programmeur> {
 
     @Override
     public String toString() {
-        return nom + ", langages : " + langages;
+        return "Nom: "+nom+" Courriel: "+courriel + ", langages : " + langages;
     }
 }

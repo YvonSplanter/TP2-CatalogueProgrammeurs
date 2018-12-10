@@ -29,6 +29,27 @@ public class ProgrammeurDao {
         return false;
     }
     
+    public Programmeur findByCourriel(String c) {
+        Programmeur p = null;
+        try {
+            PreparedStatement stm = connexion.getInstance().prepareStatement("SELECT * FROM programmeur WHERE COURRIEL=?");
+            stm.setString(1, c);
+            ResultSet res = stm.executeQuery();
+            if (res.next()){
+                p = new Programmeur();
+                p.setCourriel(c);
+                p.setNom(res.getString("NOM"));
+                p.setLangages(res.getString("LANGAGES"));
+            }
+            else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgrammeurDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
+    }
+    
     public List<Programmeur> findAll() {
         List<Programmeur> liste = new ArrayList<>();
         Programmeur p;
@@ -47,6 +68,8 @@ public class ProgrammeurDao {
         }
         return liste;
     }
+    
+    
     
     
     
