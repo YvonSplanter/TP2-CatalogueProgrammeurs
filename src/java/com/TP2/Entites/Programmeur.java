@@ -49,15 +49,16 @@ public class Programmeur implements Comparable<Programmeur> {
         String[] lgs = s.split(",");
         for (String l : lgs) {
             this.ajouterLangage(l);
-            System.out.println(l);
         }
     }
     
     public String getLangages(){
         String strLangages="";
-        for(String langue : langages){
+        for(String langue : this.langages){
             strLangages+=langue;
+            strLangages+=",";
         }
+        strLangages= strLangages.substring(0,strLangages.length()-1);
         strLangages.trim();
         return strLangages;
     }

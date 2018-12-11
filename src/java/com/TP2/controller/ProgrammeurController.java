@@ -4,7 +4,12 @@ package com.TP2.controller;
 import com.TP2.Entites.Programmeur;
 import com.TP2.services.ProgrammeurService;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,10 +51,29 @@ public class ProgrammeurController {
         return "profil";
     }
     
+    //@ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value="rechercher", params={"id"})
+    public String profile(@RequestParam("id") String courriel, ModelMap model) {
+        model.addAttribute("programmeur", this.programmeurService.getProgrammeur(courriel) );
+        return "profil";
+    }
+    
     @RequestMapping(value = "ajouter", method = RequestMethod.GET)
     public String ajouter(ModelMap model) throws IOException
     { 
         return "ajouter";
+    }
+    
+    @RequestMapping(value = "recherche", method = RequestMethod.GET)
+    public String rechercher(ModelMap model) throws IOException
+    { 
+        return "rechercher";
+    }
+    
+    @RequestMapping(value = "retour", method = RequestMethod.GET)
+    public View retour(ModelMap model) throws IOException
+    { 
+        return new RedirectView("/",true,false);
     }
     
     @RequestMapping(value = "ajouter", method = RequestMethod.POST)
@@ -62,5 +86,14 @@ public class ProgrammeurController {
         this.programmeurService.addProgrammeur(p);
         
         return "index";
+    }
+    
+    @RequestMapping(value = "rechercher", method = RequestMethod.POST)
+    public String rechercher(@RequestParam("lgs") String langages,ModelMap model){
+        Set<Programmeur> resultats;
+        resultats=this.programmeurService.getProgrammeursByLangages(langages);
+        model.addAttribute("listeP",resultats);
+        
+        return "rechercher";
     }
 }

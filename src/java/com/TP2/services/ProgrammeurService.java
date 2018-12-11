@@ -4,7 +4,10 @@ package com.TP2.services;
 import com.TP2.Entites.Programmeur;
 import com.TP2.dao.ProgrammeurDao;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 
@@ -47,4 +50,33 @@ public class ProgrammeurService {
         liste = dao.findAll();
         return liste;
     }  
+    
+    public Set<Programmeur> getProgrammeursByLangages(String langages){
+        //Creation catalogue
+        Map< String,List<Programmeur> > catalogueP = new HashMap<>();
+        List<Programmeur> listeP = this.getProgrammeurs();
+        for (Programmeur p : listeP){
+            String[] lgs = p.getLangages().split(",");
+            for (String l : lgs){
+                l=l.trim().toUpperCase();
+                if(!catalogueP.containsKey(l)){
+                    catalogueP.put(l,new ArrayList());
+                }
+                catalogueP.get(l).add(p);
+            }
+        }
+        
+        //chercher les programmeur
+        Set<Programmeur> resultats;
+        resultats = new TreeSet<>();
+        String[] t = langages.split(",");
+        for (String langage:t){
+            langage=langage.trim().toUpperCase();
+            if(catalogueP.containsKey(langage.trim())){
+                List<Programmeur> liste = catalogueP.get(langage.trim());
+                resultats.addAll(liste);
+            }
+        }
+        return resultats;
+    }
 }

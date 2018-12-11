@@ -15,6 +15,6 @@
        ${requestScope.programmeur}
        
        <br>
-       <a href="?">Accueil</a>
+       <a href="retour">Accueil</a>
     </body>
 </html>

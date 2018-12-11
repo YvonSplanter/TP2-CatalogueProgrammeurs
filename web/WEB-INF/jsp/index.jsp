@@ -19,8 +19,8 @@
     <body>
         
         <ul>
-            <li class="menu"><a href="?">Accueil</a></li>
             <li class="menu"><a href="ajouter">Ajouter</a></li>
+            <li class="menu"><a href="recherche">Rechercher</a></li>
         </ul> 
  
         <h1>Liste des programmeurs</h1>
@@ -29,16 +29,6 @@
                 <li><a href="?id=${p.courriel}"><c:out value="${p.nom}" /></a></li>
             </c:forEach>
         </ul>
-        
-        <br>
-        <h2>Rechercher</h2>
-        <form  method="post">
-            <label>Langages</label>
-            <input type="text" name="lgs" id="lgs"><br>
-            <input type="hidden" name="rechercher">
-            <input type="submit" value="Rechercher">
-            
-        </form>
                 
     </body>
 </html>
